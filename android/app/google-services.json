@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "571583591064",
+    "project_id": "dikex-george-chios",
+    "storage_bucket": "dikex-george-chios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571583591064:android:1b8fa72fc4ab8f4f0396ed",
+        "android_client_info": {
+          "package_name": "com.george_chios.dikex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571583591064-59nrlnctr303s0lrf57m76eaqnvelnf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySd6SVnlZzs8klTWcoL406bfU15HF5Uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571583591064-59nrlnctr303s0lrf57m76eaqnvelnf3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571583591064-g7r3maoav8v0hldhchduq1vuk88n8b31.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.georgechios.dikex"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571583591064:android:5ff4261f3c239a2d0396ed",
+        "android_client_info": {
+          "package_name": "com.george_chios.dikex_back"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571583591064-59nrlnctr303s0lrf57m76eaqnvelnf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySd6SVnlZzs8klTWcoL406bfU15HF5Uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571583591064-59nrlnctr303s0lrf57m76eaqnvelnf3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571583591064-g7r3maoav8v0hldhchduq1vuk88n8b31.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.georgechios.dikex"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
