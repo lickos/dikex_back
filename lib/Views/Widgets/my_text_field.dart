@@ -18,6 +18,7 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: myController,
+      obscureText: isObscured,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
         label: Text(myLabel),

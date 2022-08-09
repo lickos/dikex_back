@@ -14,3 +14,4 @@ const SizedBox biggerSpace = SizedBox(
 // FIREBASE
 FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 FirebaseFirestore firestore = FirebaseFirestore.instance;
+CollectionReference myUsers = firestore.collection('users');

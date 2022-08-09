@@ -1,4 +1,5 @@
 import 'package:dikex_back/Utilities/constants.dart';
+import 'package:dikex_back/Views/Screens/my_home_page.dart';
 import 'package:dikex_back/Views/Widgets/buttons.dart';
 import 'package:dikex_back/Views/Widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 myController: _passwordController,
                 myLabel: 'Password',
                 myIcon: const Icon(Icons.key),
+                isObscured: true,
               ),
               verticalSpace,
               MyButton(
@@ -63,7 +65,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  loginUser() {
-    AuthController().loginUser(_emailController.text, _passwordController.text);
+  loginUser() async {
+    String myString = await AuthController()
+        .loginUser(_emailController.text, _passwordController.text);
+    moveToNextPage(myString);
+  }
+
+  moveToNextPage(String paidikosName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyHomePage(
+          paidikos: paidikosName,
+        ),
+      ),
+    );
   }
 }
