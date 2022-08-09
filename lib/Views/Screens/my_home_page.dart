@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dikex_back/Controllers/database_controller.dart';
 import 'package:dikex_back/Utilities/app_colors.dart';
+import 'package:dikex_back/Views/Widgets/diatrofologio_field.dart';
+import 'package:dikex_back/Views/Widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<dynamic> myData = [];
+  List<Map<String, TextEditingController>> myControllers = [];
 
   @override
   void initState() {
@@ -24,11 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getMyData() async {
-    var tempData = await DatabaseController().getdiatrofologioNerompigies();
-    setState(() {
-      myData = tempData;
-      print(myData);
-    });
+    DatabaseController().getdiatrofologioNerompigies('ΔΕΥΤΕΡΑ');
   }
 
   @override
@@ -51,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [],
+                    children: getFields('ΔΕΥΤΕΡΑ'),
                   ),
                   Text('ΤΡΙΤΗ'),
                   Text('ΤΕΤΑΡΤΗ'),
@@ -64,5 +63,39 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  getFields(String day) {
+    List<Widget> dayFood = [];
+    TextEditingController proinoController = TextEditingController();
+    TextEditingController mesimerianoController = TextEditingController();
+    dayFood.add(Text(day));
+    var returnedData = DatabaseController().getdiatrofologioNerompigies(day);
+    print(returnedData);
+    // proinoController.text = returnedData['ΠΡΩΙΝΟ'];
+    // mesimerianoController.text = returnedData['ΜΕΣΗΜΕΡΙΑΝΟ'];
+    // dayFood.add(
+    //   Row(
+    //     children: [
+    //       const Text(
+    //         'Πρωινό: ',
+    //         style: TextStyle(fontWeight: FontWeight.w500),
+    //       ),
+    //       DiatrofologioField(myController: proinoController),
+    //     ],
+    //   ),
+    // );
+    // dayFood.add(
+    //   Row(
+    //     children: [
+    //       const Text(
+    //         'Μεσημεριανό: ',
+    //         style: TextStyle(fontWeight: FontWeight.w500),
+    //       ),
+    //       DiatrofologioField(myController: mesimerianoController),
+    //     ],
+    //   ),
+    // );
+    return dayFood;
   }
 }
