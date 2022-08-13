@@ -18,18 +18,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Map<String, TextEditingController>> myControllers = [];
-
-  @override
-  void initState() {
-    getMyData();
-    super.initState();
-  }
-
-  getMyData() async {
-    DatabaseController().getdiatrofologioNerompigies('ΔΕΥΤΕΡΑ');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,13 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: getFields('ΔΕΥΤΕΡΑ'),
-                  ),
-                  Text('ΤΡΙΤΗ'),
+                  buildColumn('ΔΕΥΤΕΡΑ'),
+                  buildColumn('ΤΡΙΤΗ'),
                   Text('ΤΕΤΑΡΤΗ'),
                   Text('ΠΕΜΠΤΗ'),
                   Text('ΠΑΡΑΣΚΕΥΗ'),
@@ -65,37 +50,30 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  getFields(String day) {
-    List<Widget> dayFood = [];
-    TextEditingController proinoController = TextEditingController();
-    TextEditingController mesimerianoController = TextEditingController();
-    dayFood.add(Text(day));
-    var returnedData = DatabaseController().getdiatrofologioNerompigies(day);
-    print(returnedData);
-    // proinoController.text = returnedData['ΠΡΩΙΝΟ'];
-    // mesimerianoController.text = returnedData['ΜΕΣΗΜΕΡΙΑΝΟ'];
-    // dayFood.add(
-    //   Row(
-    //     children: [
-    //       const Text(
-    //         'Πρωινό: ',
-    //         style: TextStyle(fontWeight: FontWeight.w500),
-    //       ),
-    //       DiatrofologioField(myController: proinoController),
-    //     ],
-    //   ),
-    // );
-    // dayFood.add(
-    //   Row(
-    //     children: [
-    //       const Text(
-    //         'Μεσημεριανό: ',
-    //         style: TextStyle(fontWeight: FontWeight.w500),
-    //       ),
-    //       DiatrofologioField(myController: mesimerianoController),
-    //     ],
-    //   ),
-    // );
-    return dayFood;
+  Widget buildColumn(String day) {
+    return FutureBuilder(
+      future: DatabaseController().getdiatrofologioNerompigies(day),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data!.exists) {
+          return const Text("Document does not exist");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          return DiatrofologioField(
+              day: day,
+              nipiaProino: '${data['ΠΡΩΙΝΟ'][1]}',
+              nipiaMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ'][1]}',
+              vrefiMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ'][0]}',
+              vrefiProino: '${data['ΠΡΩΙΝΟ'][0]}');
+        }
+        return const Text('Loading....');
+      },
+    );
   }
 }
