@@ -1,3 +1,4 @@
+import 'package:dikex_back/Controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 
 class DiatrofologioField extends StatefulWidget {
@@ -108,7 +109,7 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                       IconButton(
                         onPressed: () {
                           _openAlert(vrefiProinoController, 'ΠΡΩΙΝΟ - ΒΡΕΦΗ',
-                              vrefiProinoText);
+                              'vrefiProino');
                         },
                         icon: const Icon(Icons.edit),
                       )
@@ -198,8 +199,11 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
     );
   }
 
-  Future<void> _openAlert(TextEditingController myController, String alertTitle,
-      String myText) async {
+  Future<void> _openAlert(
+    TextEditingController myController,
+    String alertTitle,
+    String myFunctionString,
+  ) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -221,11 +225,22 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
             IconButton(
               icon: const Icon(Icons.save),
               onPressed: () {
-                setState(() {
-                  myText = myController.text;
-                  print(myText);
-                  print(vrefiProinoText);
-                });
+                switch (myFunctionString) {
+                  case 'vrefiProino':
+                    {
+                      setVrefiProino(myController, 'ΠΡΩΙΝΟ-ΒΡΕΦΗ');
+                    }
+                    break;
+                  case 'vrefiMesimeriano':
+                    {
+                      // setVrefiProino(myController);
+                    }
+                    break;
+                  default:
+                    {
+                      // setVrefiProino(myController);
+                    }
+                }
                 Navigator.of(context).pop();
               },
             ),
@@ -233,5 +248,13 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
         );
       },
     );
+  }
+
+  void setVrefiProino(
+      TextEditingController myController, String timeLunch) {
+    setState(() {
+      vrefiProinoText = myController.text;
+    });
+    DatabaseController().setItemInArray(widget.day, timeLunch, myController.text);
   }
 }

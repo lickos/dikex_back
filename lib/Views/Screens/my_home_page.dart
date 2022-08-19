@@ -67,10 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
               snapshot.data!.data() as Map<String, dynamic>;
           return DiatrofologioField(
               day: day,
-              nipiaProino: '${data['ΠΡΩΙΝΟ'][1]}',
-              nipiaMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ'][1]}',
-              vrefiMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ'][0]}',
-              vrefiProino: '${data['ΠΡΩΙΝΟ'][0]}');
+              nipiaProino: '${data['ΠΡΩΙΝΟ-ΝΗΠΙΑ']}',
+              nipiaMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ-ΝΗΠΙΑ']}',
+              vrefiMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ-ΒΡΕΦΗ']}',
+              vrefiProino: '${data['ΠΡΩΙΝΟ-ΒΡΕΦΗ']}');
         }
         return const Text('Loading....');
       },
