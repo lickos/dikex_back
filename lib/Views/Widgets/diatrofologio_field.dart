@@ -107,8 +107,8 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                       Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Text(
-                          textAlign: TextAlign.left,
                           vrefiProinoText,
+                          textAlign: TextAlign.left,
                           maxLines: 3,
                         ),
                       ),
