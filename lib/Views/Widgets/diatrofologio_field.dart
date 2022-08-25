@@ -59,7 +59,13 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
       width: size.width / 5.1,
       child: Column(
         children: [
-          Text(widget.day),
+          Text(
+            widget.day,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           Table(
             defaultColumnWidth: const FlexColumnWidth(1.0),
             border: TableBorder.all(),
@@ -135,6 +141,13 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                           nipiaProinoText,
                           textAlign: TextAlign.left,
                         ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          _openAlert(nipiaProinoController, 'ΠΡΩΙΝΟ - ΝΗΠΙΑ',
+                              'nipiaProino');
+                        },
+                        icon: const Icon(Icons.edit),
                       )
                     ],
                   ),
@@ -163,6 +176,13 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                             textAlign: TextAlign.left,
                           ),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            _openAlert(vrefiMesimerioanoController,
+                                'ΜΕΣΗΜΕΡΙΑΝΟ - ΒΡΕΦΗ', 'vrefiMesimeriano');
+                          },
+                          icon: const Icon(Icons.edit),
+                        )
                       ],
                     ),
                   ),
@@ -187,6 +207,13 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                             maxLines: 3,
                           ),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            _openAlert(nipiaMesimerianoController,
+                                'ΜΕΣΗΜΕΡΙΑΝΟ - ΝΗΠΙΑ', 'nipiaMesimeriano');
+                          },
+                          icon: const Icon(Icons.edit),
+                        )
                       ],
                     ),
                   ),
@@ -231,9 +258,19 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
                       setVrefiProino(myController, 'ΠΡΩΙΝΟ-ΒΡΕΦΗ');
                     }
                     break;
+                  case 'nipiaProino':
+                    {
+                      setNipiaProino(myController, 'ΠΡΩΙΝΟ-ΝΗΠΙΑ');
+                    }
+                    break;
                   case 'vrefiMesimeriano':
                     {
-                      // setVrefiProino(myController);
+                      setVrefiMesimeriano(myController, 'ΜΕΣΗΜΕΡΙΑΝΟ-ΒΡΕΦΗ');
+                    }
+                    break;
+                  case 'nipiaMesimeriano':
+                    {
+                      setNipiaMesimeriano(myController, 'ΜΕΣΗΜΕΡΙΑΝΟ-ΝΗΠΙΑ');
                     }
                     break;
                   default:
@@ -250,11 +287,37 @@ class _DiatrofologioFieldState extends State<DiatrofologioField> {
     );
   }
 
-  void setVrefiProino(
-      TextEditingController myController, String timeLunch) {
+  void setVrefiProino(TextEditingController myController, String timeLunch) {
     setState(() {
       vrefiProinoText = myController.text;
     });
-    DatabaseController().setItemInArray(widget.day, timeLunch, myController.text);
+    DatabaseController()
+        .setItemInArray(widget.day, timeLunch, myController.text);
+  }
+
+  void setNipiaProino(TextEditingController myController, String timeLunch) {
+    setState(() {
+      nipiaProinoText = myController.text;
+    });
+    DatabaseController()
+        .setItemInArray(widget.day, timeLunch, myController.text);
+  }
+
+  void setVrefiMesimeriano(
+      TextEditingController myController, String timeLunch) {
+    setState(() {
+      vrefiMesimerianoText = myController.text;
+    });
+    DatabaseController()
+        .setItemInArray(widget.day, timeLunch, myController.text);
+  }
+
+  void setNipiaMesimeriano(
+      TextEditingController myController, String timeLunch) {
+    setState(() {
+      nipiaMesimerianoText = myController.text;
+    });
+    DatabaseController()
+        .setItemInArray(widget.day, timeLunch, myController.text);
   }
 }

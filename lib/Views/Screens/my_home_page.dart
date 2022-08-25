@@ -36,14 +36,57 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  buildColumn('ΔΕΥΤΕΡΑ'),
-                  buildColumn('ΤΡΙΤΗ'),
-                  Text('ΤΕΤΑΡΤΗ'),
-                  Text('ΠΕΜΠΤΗ'),
-                  Text('ΠΑΡΑΣΚΕΥΗ'),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: buildColumn('ΔΕΥΤΕΡΑ'),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: buildColumn('ΤΡΙΤΗ'),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: buildColumn('ΤΕΤΑΡΤΗ'),
+                  ),
                 ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: buildColumn('ΠΕΜΠΤΗ'),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(flex: 1, child: buildColumn('ΠΑΡΑΣΚΕΥΗ')),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const Expanded(
+                    flex: 1,
+                    child: SizedBox(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -65,12 +108,23 @@ class _MyHomePageState extends State<MyHomePage> {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-          return DiatrofologioField(
+          if (data.isEmpty) {
+            return DiatrofologioField(
+              day: day,
+              nipiaProino: '',
+              nipiaMesimeriano: '',
+              vrefiMesimeriano: '',
+              vrefiProino: '',
+            );
+          } else {
+            return DiatrofologioField(
               day: day,
               nipiaProino: '${data['ΠΡΩΙΝΟ-ΝΗΠΙΑ']}',
               nipiaMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ-ΝΗΠΙΑ']}',
               vrefiMesimeriano: '${data['ΜΕΣΗΜΕΡΙΑΝΟ-ΒΡΕΦΗ']}',
-              vrefiProino: '${data['ΠΡΩΙΝΟ-ΒΡΕΦΗ']}');
+              vrefiProino: '${data['ΠΡΩΙΝΟ-ΒΡΕΦΗ']}',
+            );
+          }
         }
         return const Text('Loading....');
       },
